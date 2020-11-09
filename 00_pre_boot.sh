@@ -20,7 +20,7 @@
 #######################
 
 usage() {
-  echo "Usage: $0 -b <boot partition>  -s <system partition> [-ewsh]"
+  echo "Usage: $0 -b <boot partition>  -s <system partition> [-ewh]"
   echo "           -b boot partition on SD Card"
   echo "           -s system partition on SD Card"
   echo "           -w active wifi with static IP"
@@ -32,7 +32,7 @@ check_path () {
   path=$1
 
   if [ "$path"x == ""x ] || [ ! -d "$path" ]; then
-    echo "Path \"$path\ on SD Card directory is missing or invalid" >&2
+    echo "Path \"$path\" on SD Card directory is missing or invalid" >&2
     exit
   fi
 }
@@ -50,11 +50,11 @@ do
        check_path $sys_partition
       ;;
     w )
-      interface=wlan0
+      interface="wlan0"
       wifi=true
       ;;
     e )
-      interface=eth0
+      interface="eth0"
       wifi=false
       ;;
     h )
@@ -102,8 +102,8 @@ ctrl_interface=/var/run/wpa_supplicant
 
 network={
  scan_ssid=1
- ssid=${RASPC_ssid}
- psk=${RASPC_psk}
+ ssid=\"${RASPC_ssid}\"
+ psk=\"${RASPC_psk}\"
 }" > $wpa_supplicant_file
 fi
 echo "done"
@@ -126,4 +126,6 @@ static routers=${RASPC_routers}
 static domain_name_servers=${RASPC_domain_name_servers}" >> "$dhcpcd_file"
   fi
 fi
+echo "done"
 
+echo -e "\nYou can put the sd card in the raspberry and start it before launch 01_copy_ssh_key.sh"
