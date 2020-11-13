@@ -11,7 +11,7 @@ TODO:
 
 ## Usage
 
-####Step 1: Activate the ssh and assigned a static IP
+### Step 1: Activate the ssh and assigned a static IP
 
 You must fill in the config.ini file with your data
 ```bash
@@ -44,14 +44,14 @@ Then run the script `00_pre_boot_.sh`
 ```
 *If the 2 options -w -e are passed to the script, the Ethernet connection takes over and the WiFi connection is not configured*
 
-####Step 2: Generate an ssh key to allow a connection with the ansible server:
+#### Step 2: Generate an ssh key to allow a connection with the ansible server:
 ```bash
 ./01_ssh_key.sh -t <Raspberry IP>
 ```
 The script uses the default credentials to connect to the raspberry  
 *It is possible to change the  default credentials by using the options -u < user > and -p < password >*
 
-####Step 3: Configuring raspberry with ansible
+#### Step 3: Configuring raspberry with ansible
  
  TODO
 
