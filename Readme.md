@@ -11,7 +11,7 @@ TODO:
 
 ## Usage
 
-### Step 1: Activate the ssh and assigned a static IP
+#### Step 1: Activate the ssh and assigned a static IP
 
 You must fill in the config.ini file with your data
 ```bash
