@@ -70,7 +70,7 @@ docker build -t raspc_ssh_key images/01_ssh_key
 echo '-----------------'
 echo '--- Run image ---'
 echo '-----------------'
-docker run -v $(pwd)/ansible/keys:/home/raspc/.ssh/ raspc_ssh_key "$pwd" "$user" "$target"
+docker run -v $(pwd)/keys:/home/raspc/.ssh/ raspc_ssh_key "$pwd" "$user" "$target"
 
 echo '--------------------'
 echo '--- Delete image ---'
