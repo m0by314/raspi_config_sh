@@ -28,7 +28,6 @@ usage() {
   echo "           -b boot partition on SD Card"
   echo "           -s system partition on SD Card"
   echo "           -w active WiFi with static IP"
-  echo "           -e active Ethernet static IP"
   echo "           -h show help"
 }
 
@@ -41,7 +40,7 @@ check_path () {
   fi
 }
 
-while getopts ':b:s:ewh' option
+while getopts ':b:s:wh' option
 do
   case "${option}"
   in
@@ -54,12 +53,7 @@ do
        check_path $sys_partition
       ;;
     w )
-      interface=$RASPCT_wifi_interface
       wifi=true
-      ;;
-    e )
-      interface=$RASPCT_eth_interface
-      wifi=false
       ;;
     h )
       usage
@@ -100,6 +94,7 @@ echo -e "\nBoot section configuration"
 touch ${boot_partition}/ssh
 
 if $wifi; then
+  interface=$RASPCT_wifi_interface
  echo "country=${RASPCT_country}
 update_config=1
 ctrl_interface=/var/run/wpa_supplicant
@@ -109,6 +104,8 @@ network={
  ssid=\"${RASPCT_ssid}\"
  psk=\"${RASPCT_psk}\"
 }" > $wpa_supplicant_file
+else
+  interface=$RASPCT_eth_interface
 fi
 echo "done"
 

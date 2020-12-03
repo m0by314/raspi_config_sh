@@ -40,9 +40,9 @@ Then run the script `00_pre_boot_.sh`
 ```
 * __Example for activated Ethernet__:
 ``` bash
-./00_pre_boot.sh -b /Volumes/boot -s /Volumes/rootfs -e 
+./00_pre_boot.sh -b /Volumes/boot -s /Volumes/rootfs 
 ```
-*If the 2 options -w -e are passed to the script, the Ethernet connection takes over and the WiFi connection is not configured*
+
 
 #### Step 2: Generate an ssh key to allow a connection with the ansible server:
 ```bash
