@@ -74,6 +74,11 @@ do
   esac
 done
 
+if [ ! "$boot_partition" ] || [ ! "$sys_partition" ]; then
+  echo "arguments -b and -s must be provided"
+  usage; exit 1
+fi
+
 # File
 wpa_supplicant_file="${boot_partition}/wpa_supplicant.conf"
 dhcpcd_file="${sys_partition}/etc/dhcpcd.conf"
