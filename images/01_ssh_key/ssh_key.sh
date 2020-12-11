@@ -6,7 +6,7 @@ if [ "$1" == "-h" ]; then
 fi
 
 if [ -e ~/.ssh/id_rsa ]; then
-  rm ~/.ssh/id_rsa*
+  rm ~/.ssh/*
 fi
 
 ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa
