@@ -40,8 +40,6 @@ class TestLibDocker(unittest.TestCase):
         """
         Test method ImagesManager().build()
         """
-        print("/////////")
-        print(TESTSUITE_FOLDER + "Dockerfile_false/")
         self.assertTrue(self.img_manager.build(tag="test_build_true",
                                                path=TESTSUITE_FOLDER + "Dockerfile_true/"))
         self.assertFalse(self.img_manager.build(tag="test_build_false",
