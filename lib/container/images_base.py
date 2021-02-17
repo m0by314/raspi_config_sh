@@ -1,10 +1,10 @@
-""" Define interfaces for container manager"""
+""" Define interface for images class management"""
 import abc
 
 
 class ImagesBase(abc.ABC):
     """
-    Interface for images manager
+    Interface for images class
     """
     @abc.abstractmethod
     def get(self, name: str) -> str:
