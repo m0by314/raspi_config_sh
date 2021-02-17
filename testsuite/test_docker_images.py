@@ -6,7 +6,6 @@ import site
 
 site.addsitedir('..')
 from lib.container.docker.images import DockerImages
-from lib.container.docker.client import DockerClient
 
 TESTSUITE_FOLDER = os.getcwd()
 
