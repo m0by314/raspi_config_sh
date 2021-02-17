@@ -6,6 +6,7 @@ import site
 
 site.addsitedir('..')
 from lib.container.docker.images import DockerImages
+from lib.container.docker.client import DockerClient
 
 TESTSUITE_FOLDER = os.getcwd()
 
@@ -20,7 +21,7 @@ class TestDockerImages(unittest.TestCase):
         """
         Initialize docker client
         """
-        cls.cli = DockerImages('unix://var/run/docker.sock')
+        cls.cli = DockerImages()
 
     def test_build(self):
         """

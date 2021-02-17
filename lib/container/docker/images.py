@@ -5,22 +5,20 @@ For more information visit:
     https://docker-py.readthedocs.io/en/stable/api.html
 """
 import re
-import docker
 
-from lib.container.images_base import ImagesBase
+from lib.container.interface.images import ImagesBase
+from lib.container.docker.client import DockerClient
 
 
-class DockerImages(ImagesBase):
+class DockerImages(ImagesBase, DockerClient):
     """
     Manage Docker image on the server.
 
     Example:
-        import docker
-        images = DockerImages()
+        DockerImages().build(tag="test", path="dockerfile_path", rm=True))
+        image_id = DockerImages().get("test")
+        DockerImages().delete("test")
     """
-
-    def __init__(self, base_url: str):
-        self.__cli = docker.APIClient(base_url=base_url)
 
     def get(self, name: str) -> str:
         """
@@ -29,7 +27,7 @@ class DockerImages(ImagesBase):
         :return: image ID
         :raises: NameError if image not found
         """
-        response = self.__cli.images(quiet=True, filters={"reference": name})
+        response = self._con.images(quiet=True, filters={"reference": name})
         if not response:
             raise NameError("Image Not Found: " + name)
         return response[0].replace("sha256:", "")
@@ -56,7 +54,7 @@ class DockerImages(ImagesBase):
         :return: boolean
         """
         building = False
-        response = self.__cli.build(**kwargs)
+        response = self._con.build(**kwargs)
 
         for line in response:
             print(line)
@@ -71,4 +69,4 @@ class DockerImages(ImagesBase):
         :param name: the image name.
         :return: boolean
         """
-        return self.__cli.remove_image(name)
+        return self._con.remove_image(name)

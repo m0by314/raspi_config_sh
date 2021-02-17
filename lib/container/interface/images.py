@@ -1,4 +1,4 @@
-""" Define interface for images class management"""
+""" Minimal interface for images class management"""
 import abc
 
 
@@ -6,6 +6,7 @@ class ImagesBase(abc.ABC):
     """
     Interface for images class
     """
+
     @abc.abstractmethod
     def get(self, name: str) -> str:
         """
