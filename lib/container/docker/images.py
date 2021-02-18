@@ -15,9 +15,11 @@ class DockerImages(ImagesBase, DockerClient):
     Manage Docker image on the server.
 
     Example:
-        DockerImages().build(tag="test", path="dockerfile_path", rm=True))
-        image_id = DockerImages().get("test")
-        DockerImages().delete("test")
+        docker_images = DockerImages()
+
+        docker_images.build(tag="test", path="dockerfile_path", rm=True))
+        image_id = docker_images.get("test")
+        docker_images.delete("test")
     """
 
     def get(self, name: str) -> str:
