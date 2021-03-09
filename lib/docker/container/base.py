@@ -1,8 +1,9 @@
 """ Minimal interface for container class management"""
 import abc
+from ..client import DockerClient
 
 
-class ContainerBase(abc.ABC):
+class ContainerBase(DockerClient):
     """
     Interface for container class
     """
@@ -21,4 +22,3 @@ class ContainerBase(abc.ABC):
         :param container: the container to remove
         :return: bool
         """
-

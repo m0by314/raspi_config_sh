@@ -1,8 +1,9 @@
 """ Minimal interface for images class management"""
 import abc
+from ..client import DockerClient
 
 
-class ImagesBase(abc.ABC):
+class ImagesBase(DockerClient):
     """
     Interface for images class
     """

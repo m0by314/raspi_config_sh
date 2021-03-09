@@ -5,33 +5,41 @@ For more information visit:
     https://docker-py.readthedocs.io/en/stable/api.html
 """
 import re
-
-from lib.container.interface.images import ImagesBase
-from lib.container.docker.client import DockerClient
+from .base import ImagesBase
 
 
-class DockerImages(ImagesBase, DockerClient):
+class DockerImages(ImagesBase):
     """
     Manage Docker image on the server.
 
     Example:
-        docker_images = DockerImages()
+        initialisation:
+            client = DockerClient()
+            img_manager = DockerImages(client)
 
-        docker_images.build(tag="test", path="dockerfile_path", rm=True))
-        image_id = docker_images.get("test")
-        docker_images.delete("test")
+        build:
+            img_manager.build(tag="test", path="dockerfile_path", rm=True))
+
+        get image ID:
+            img_manager.get("test")
+
+        delete:
+            img_manager.delete("test")
     """
+
+    def __init__(self, *args, **kwargs):
+        self._con = self.connector
 
     def get(self, name: str) -> str:
         """
         Gets image ID.
         :param name: The name of the image.
-        :return: image ID
-        :raises: NameError if image not found
+        :return: image ID or None
         """
         response = self._con.images(quiet=True, filters={"reference": name})
         if not response:
-            raise NameError("Image Not Found: " + name)
+            print("Image Not Found: " + name)
+            return None
         return response[0].replace("sha256:", "")
 
     def build(self, **kwargs: dict) -> bool:
