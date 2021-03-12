@@ -3,6 +3,7 @@
 import unittest
 import os
 import site
+import docker
 
 site.addsitedir('..')
 
@@ -24,6 +25,10 @@ class TestDockerClient(unittest.TestCase):
         cli1 = DockerClient()
         cli2 = DockerClient()
         self.assertTrue(cli1 is cli2)
+
+    def test_check_type(self):
+        """Checks that the type of the object is correct."""
+        self.assertTrue(isinstance(DockerClient(), docker.api.client.APIClient))
 
 
 if __name__ == '__main__':

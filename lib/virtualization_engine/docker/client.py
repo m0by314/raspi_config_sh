@@ -40,7 +40,7 @@ class DockerClient(ClientBase):  # pylint: disable=too-few-public-methods
         print("connect")
 
         try:
-            _con = APIClient(**param)
+            con = APIClient(**param)
         except Exception as err:
             raise ConnectionError(err) from err
-        return _con
+        return con
