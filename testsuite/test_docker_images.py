@@ -5,9 +5,10 @@ import os
 import site
 
 site.addsitedir('..')
-from lib.container.docker.images import DockerImages
+from lib.virtualization_engine.docker.images import DockerImages
 
 TESTSUITE_FOLDER = os.getcwd()
+URL = 'unix://var/run/docker.sock'
 
 
 class TestDockerImages(unittest.TestCase):
