@@ -6,9 +6,9 @@ import site
 
 site.addsitedir('..')
 from lib.virtualization_engine.docker.images import DockerImages
+from lib.virtualization_engine.docker.client import DockerClient
 
 TESTSUITE_FOLDER = os.getcwd()
-URL = 'unix://var/run/docker.sock'
 
 
 class TestDockerImages(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestDockerImages(unittest.TestCase):
         """
         Initialize docker client
         """
-        cls.cli = DockerImages()
+        cls.cli = DockerImages(DockerClient())
 
     def test_build(self):
         """
@@ -39,27 +39,17 @@ class TestDockerImages(unittest.TestCase):
                                         path=TESTSUITE_FOLDER + "/Dockerfile_false/",
                                         rm=True))
 
-    def test_get(self):
+    def test_get_id(self):
         """
-        Test method DockerImages.get()
+        Test method DockerImages.get_id()
         """
-        self.assertTrue(self.cli.get("alpine"))
+        self.assertTrue(self.cli.get_id("alpine"))
 
-    def test_get_raise_exception(self):
+    def test_get_id_not_found(self):
         """
-        Test raise exception on the method DockerImages.get()
+        Test method DockerImages.get_id() with unknown images
         """
-        with self.assertRaises(NameError):  # needed to work well assertRaises
-            self.cli.get("accttt")
-
-    def test_get_raise_no_exception(self):
-        """
-        Test not raise exception on the method DockerImages.get()
-        """
-        try:
-            self.cli.get("alpine")
-        except NameError:
-            self.fail("method get raised NameError unexpectedly!")
+        self.assertEqual(self.cli.get_id("acttt"), None, "Get_id should return none")
 
     def test_delete(self):
         """

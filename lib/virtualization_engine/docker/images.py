@@ -5,7 +5,7 @@ For more information visit:
     https://docker-py.readthedocs.io/en/stable/api.html
 """
 import re
-from .base import ImagesBase
+from lib.virtualization_engine.images_base import ImagesBase
 
 
 class DockerImages(ImagesBase):
@@ -27,19 +27,20 @@ class DockerImages(ImagesBase):
             img_manager.delete("test")
     """
 
-    def __init__(self, *args, **kwargs):
-        self._con = self.connector
+    def __init__(self, client):
+        self._cli = client
 
-    def get(self, name: str) -> str:
+    def get_id(self, name: str) -> str:
         """
         Gets image ID.
         :param name: The name of the image.
-        :return: image ID or None
+        :return: image ID or None.
         """
-        response = self._con.images(quiet=True, filters={"reference": name})
+        response = self._cli.images(quiet=True, filters={"reference": name})
         if not response:
             print("Image Not Found: " + name)
             return None
+
         return response[0].replace("sha256:", "")
 
     def build(self, **kwargs: dict) -> bool:
@@ -64,7 +65,7 @@ class DockerImages(ImagesBase):
         :return: boolean
         """
         building = False
-        response = self._con.build(**kwargs)
+        response = self._cli.build(**kwargs)
 
         for line in response:
             print(line)
@@ -79,4 +80,4 @@ class DockerImages(ImagesBase):
         :param name: the image name.
         :return: boolean
         """
-        return self._con.remove_image(name)
+        return self._cli.remove_image(name)
