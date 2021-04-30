@@ -1,16 +1,14 @@
-""" Minimal interface for container class management"""
+""" Minimal interface for container management."""
 import abc
-from ..client import DockerClient
 
+# TODO add method
+class ContainerBase:
+    """Define method to manage images."""
 
-class ContainerBase(DockerClient):
-    """
-    Interface for container class
-    """
     @abc.abstractmethod
     def create(self, **kwargs) -> bool:
         """
-        Define create container method
+        Define method to create container.
         :param kwargs: builds parameters
         :return: bool
         """
@@ -18,7 +16,7 @@ class ContainerBase(DockerClient):
     @abc.abstractmethod
     def delete(self, container: str) -> bool:
         """
-        Define delete container method
+        Define method to delete container.
         :param container: the container to remove
         :return: bool
         """
