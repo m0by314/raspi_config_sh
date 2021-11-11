@@ -65,7 +65,7 @@ done
 echo '--------------------'
 echo '--- Build image ----'
 echo '--------------------'
-docker src -t raspc_ssh_key images/01_ssh_key
+docker build -t raspc_ssh_key images/01_ssh_key
 
 echo '-----------------'
 echo '--- Run image ---'

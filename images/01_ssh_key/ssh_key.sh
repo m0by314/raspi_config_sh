@@ -5,10 +5,8 @@ if [ "$1" == "-h" ]; then
   exit
 fi
 
-if [ -e ~/.ssh/id_rsa ]; then
-  rm ~/.ssh/*
+if [ ! -e ~/.ssh/id_rsa ]; then
+  ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa
 fi
 
-ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa
-
-sshpass -p "$1" ssh-copy-id -o StrictHostKeyChecking=no "$2"@"$3"
+sshpass -p "$1" ssh-copy-id -f -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa  "$2"@"$3"
