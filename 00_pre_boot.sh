@@ -96,7 +96,7 @@ echo "done"
 # Boot section
 echo -e "\nBoot section configuration"
 
-touch ${boot_partition}/ssh
+echo >> ${boot_partition}/ssh.txt # requires one bit
 
 if $wifi; then
   interface=$RASPCT_wifi_interface
