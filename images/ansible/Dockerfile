@@ -8,5 +8,9 @@ USER raspc
 
 WORKDIR /etc/ansible
 
+COPY run_ansible.sh /usr/local/bin
 
-CMD ["sh", "-c", "tail -f /dev/null"]
+CMD ["/bin/bash", "/usr/local/bin/run_ansible.sh"]
+
+#CMD ["sh", "-c", "tail -f /dev/null"]
+#CMD ["/bin/bash"]
