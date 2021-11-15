@@ -1,14 +1,17 @@
 FROM alpine
 
 RUN apk update && \
-    apk add ansible bash openssh openssl && \
+    apk add ansible bash openssh openssl python3 py3-pip && \
     adduser -D raspc
+
+RUN pip3 install passlib
 
 USER raspc
 
 WORKDIR /etc/ansible
 
 COPY run_ansible.sh /usr/local/bin
+COPY encrypt_password.py /usr/local/bin
 
 CMD ["/bin/bash", "/usr/local/bin/run_ansible.sh"]
 
