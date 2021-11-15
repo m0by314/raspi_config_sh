@@ -1,6 +1,7 @@
 # Raspberry configuration tool (RASPCT)
 
-RASPCT is a utility to configure and secure a raspberry without screen or keyboard
+RASPCT is a utility to automate configure and secure a raspberry.  
+**(Functional with OS Raspbian Lite)**
 
 TODO: 
    * add role description 
@@ -8,6 +9,7 @@ TODO:
 
  * Docker
  * A Raspbian SD card ([Raspberry Pi Imager](https://www.raspberrypi.org/downloads/) to configure it quickly)
+ * If you work on Windows or MacOS, you need a utility to read partition in ext4 format 
 
 ## Usage
 
@@ -25,7 +27,7 @@ RASPCT_psk="wifi code"
 
 # dhcpcd.conf
 #
-RASPCT_ip_address=<Ip address/mask ex: 192.168.1.15/24>
+RASPCT_ip_address=<Ip address ex: 192.168.1.15>
 RASPCT_routers=<routers ip>
 RASPCT_domain_name_servers="dns ip  ex: 192.168.1.1 8.8.8.8"
 ```
@@ -52,8 +54,11 @@ The script uses the default credentials to connect to the raspberry
 *It is possible to change the  default credentials by using the options -u < user > and -p < password >*
 
 #### Step 3: Configuring raspberry with ansible
- 
- TODO
+
+
+```bash
+./02_launch_ansible.sh
+```
 
 
 
