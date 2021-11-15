@@ -134,4 +134,13 @@ static domain_name_servers=${RASPCT_domain_name_servers}" >> "$dhcpcd_file"
 fi
 echo "done"
 
+# Ansible hosts file
+echo -e "\nConfigure Ansible hosts file"
+
+ansible_hosts_file="./ansible/hosts"
+if ! grep -q "$RASPCT_ip_address" "$ansible_hosts_file" ; then
+  echo "$RASPCT_ip_address" >> "./ansible/hosts"
+fi
+echo "done"
+
 echo -e "\nYou can put the sd card in the raspberry and start it before launch 01_copy_ssh_key.sh"
