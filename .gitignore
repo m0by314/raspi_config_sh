@@ -7,5 +7,6 @@
 
 config.ini
 ./ansible/vault_key_file
+./ansible/hosts
 ./ansible/playbook/config.yml
 ./ansible/playbook/vars/user_pwd.yml
