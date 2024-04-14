@@ -1,2 +1,10 @@
 # Project exclude paths
 /venv/
+/keys
+.idea/
+.pytest_cache/
+.DS_Store
+
+config.ini
+ansible/vault_key_file
+ansible/playbook/vars/user_pwd.yml

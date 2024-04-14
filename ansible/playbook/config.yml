@@ -1,0 +1,23 @@
+---
+- hosts:
+    - pi
+  become: true
+
+  vars:
+    rasp_user: raspc
+    rasp_ssh_port: 2225
+    rasp_extra_packages:
+      - python3
+      - golang
+    CAMERA: true
+    rasp_firewall: true
+    rasp_open_firewall_port:
+      - 80
+      - 8080
+
+# Do not modify section
+    ssh_key_file: '/home/raspc/.ssh/id_rsa.pub'
+  vars_files:
+    - vars/user_pwd.yml
+  roles:
+    - m0by314.ansible_raspberry_pi_config
