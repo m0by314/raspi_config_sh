@@ -1,19 +1,17 @@
-# Raspberry configuration tool (RASPCT)
+# Scripts to configurate an Raspberry
 
-RASPCT is a utility to automate configure and secure a raspberry.  
-**(Functional with OS Raspbian Lite)**
+Set of 3 scripts to facilitate the configuration of a Raspberry
+**(Functional with OS Raspbian Lite on MacOS)**
 
-TODO: 
-   * add role description 
 ## Prerequisites
 
  * Docker
  * A Raspbian SD card ([Raspberry Pi Imager](https://www.raspberrypi.org/downloads/) to configure it quickly)
- * If you work on Windows or MacOS, you need a utility to read partition in ext4 format 
+ * If you work MacOS, you need a utility to read partition in ext4 format 
 
 ## Usage
 
-#### Step 1: Activate the ssh and assigned a static IP
+#### Script 0: Activate the ssh and assigned a static IP
 
 You must fill in the config.ini file with your data
 ```bash
@@ -46,21 +44,33 @@ Then run the script `00_pre_boot_.sh`
 ```
 
 
-#### Step 2: Generate an ssh key to allow a connection with the ansible server:
+#### Script 1: Generate an ssh key to allow a connection with the ansible server:
 ```bash
 ./01_ssh_key.sh -t <Raspberry IP>
 ```
-The script uses the default credentials to connect to the raspberry  
+This script uses the default credentials to connect to the raspberry  
 *It is possible to change the  default credentials by using the options -u < user > and -p < password >*
 
-#### Step 3: Configuring raspberry with ansible
-
+#### Script 2: Configuring raspberry with ansible
 
 ```bash
 ./02_launch_ansible.sh
 ```
+This script launches a playbook named config.yml (found in `ansible/playbook/config.yml`).  
+The host file is located in `ansible/inventory/hosts.json`, default value:
+- "ansible_host": "raspberrypi"
+- "ansible_port": 22
+- "ansible_user": "pi"
 
+The playbook uses a configuration role which allows:
+- creating a new user and deleting the "pi" account
+- change ssh port
+- activate or deactivate the raspberry I/O (serial, camera, vnc, spi, i2c etc ...)
+- install packages
+- activate the firewall
+- open ports
 
+[For more details on the role variable](https://galaxy.ansible.com/ui/standalone/roles/m0by314/ansible_raspberry_pi_config/)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
