@@ -11,7 +11,7 @@ vault_vars_file="/etc/ansible/playbook/vars/user_pwd.yml"
 i=3
 while [ $i -gt 0 ]
 do
-  echo -n Password for the new pi user:
+  echo -n Password for the new user:
   read -s password
   echo
 
@@ -49,4 +49,4 @@ ansible-vault encrypt_string --vault-password-file $vault_key_file "$password" -
 
 
 # launch playbook
-ansible-playbook playbook/config.yml --vault-password-file vault_key_file
+ansible-playbook playbook/config.yml --vault-password-file vault_key_file -i inventory/hosts.json
