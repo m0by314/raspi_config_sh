@@ -6,7 +6,5 @@
 .DS_Store
 
 config.ini
-.ansible/vault_key_file
-.ansible/hosts
-.ansible/playbook/config.yml
-.ansible/playbook/vars/user_pwd.yml
+ansible/vault_key_file
+ansible/playbook/vars/user_pwd.yml
