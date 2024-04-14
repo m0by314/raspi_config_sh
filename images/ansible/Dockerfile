@@ -1,10 +1,8 @@
 FROM alpine
 
 RUN apk update && \
-    apk add ansible bash openssh openssl python3 py3-pip && \
+    apk add ansible bash openssh openssl python3 py3-pip py3-passlib && \
     adduser -D raspc
-
-RUN pip3 install passlib
 
 USER raspc
 
